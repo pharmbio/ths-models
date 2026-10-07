@@ -1,0 +1,6 @@
+{
+  "model": "TSHR_agonist",
+  "predicts": "Thyroid-stimulating hormone receptor (TSHR) agonism",
+  "confidence": 0.85,
+  "subdomain": "tshr-agonist"
+}

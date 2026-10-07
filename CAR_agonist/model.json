@@ -1,0 +1,6 @@
+{
+  "model": "CAR_agonist",
+  "predicts": "Constitutive androstane receptor (CAR) agonism",
+  "confidence": 0.8,
+  "subdomain": "car-agonist"
+}

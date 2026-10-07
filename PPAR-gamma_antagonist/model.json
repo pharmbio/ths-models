@@ -1,0 +1,6 @@
+{
+  "model": "PPAR-gamma_antagonist",
+  "predicts": "PPAR-gamma antagonism",
+  "confidence": 0.75,
+  "subdomain": "ppar-gamma-antagonist"
+}

@@ -1,0 +1,6 @@
+{
+  "model": "AHR_agonists",
+  "predicts": "Aryl hydrocarbon receptor (AhR) agonism",
+  "confidence": 0.8,
+  "subdomain": "ahr-agonists"
+}

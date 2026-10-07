@@ -1,0 +1,6 @@
+{
+  "model": "DIO3_inhibition",
+  "predicts": "Type 3 iodothyronine deiodinase (DIO3) inhibition",
+  "confidence": 0.8,
+  "subdomain": "dio3-inhibition"
+}

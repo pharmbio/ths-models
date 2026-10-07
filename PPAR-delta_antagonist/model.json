@@ -1,0 +1,6 @@
+{
+  "model": "PPAR-delta_antagonist",
+  "predicts": "PPAR-delta antagonism",
+  "confidence": 0.75,
+  "subdomain": "ppar-delta-antagonist"
+}

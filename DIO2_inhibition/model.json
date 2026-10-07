@@ -1,0 +1,6 @@
+{
+  "model": "DIO2_inhibition",
+  "predicts": "Type 2 iodothyronine deiodinase (DIO2) inhibition",
+  "confidence": 0.8,
+  "subdomain": "dio2-inhibition"
+}

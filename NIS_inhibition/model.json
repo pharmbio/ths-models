@@ -1,0 +1,6 @@
+{
+  "model": "NIS_inhibition",
+  "predicts": "Sodium/iodide symporter (NIS) inhibition",
+  "confidence": 0.75,
+  "subdomain": "nis-inhibition"
+}

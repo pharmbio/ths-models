@@ -1,0 +1,6 @@
+{
+  "model": "TR_beta_agonist",
+  "predicts": "Thyroid hormone receptor beta (TR-beta) agonism",
+  "confidence": 0.75,
+  "subdomain": "tr-beta-agonist"
+}

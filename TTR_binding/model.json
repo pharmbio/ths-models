@@ -1,0 +1,6 @@
+{
+  "model": "TTR_binding",
+  "predicts": "Transthyretin (TTR) binding",
+  "confidence": 0.9,
+  "subdomain": "ttr-binding"
+}

@@ -1,0 +1,6 @@
+{
+  "model": "TPO_inhibition",
+  "predicts": "Thyroid peroxidase (TPO) inhibition",
+  "confidence": 0.85,
+  "subdomain": "tpo-inhibition"
+}

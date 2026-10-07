@@ -1,0 +1,6 @@
+{
+  "model": "TRHR_antagonists",
+  "predicts": "Thyrotropin-releasing hormone receptor (TRHR) antagonism",
+  "confidence": 0.85,
+  "subdomain": "trhr-antagonists"
+}

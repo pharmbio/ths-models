@@ -1,0 +1,6 @@
+{
+  "model": "DIO1_inhibition",
+  "predicts": "Type 1 iodothyronine deiodinase (DIO1) inhibition",
+  "confidence": 0.8,
+  "subdomain": "dio1-inhibition"
+}

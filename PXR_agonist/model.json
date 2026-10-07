@@ -1,0 +1,6 @@
+{
+  "model": "PXR_agonist",
+  "predicts": "Pregnane X receptor (PXR) agonism",
+  "confidence": 0.85,
+  "subdomain": "pxr-agonist"
+}
