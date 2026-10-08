@@ -92,39 +92,7 @@ shown:
   can come back negative. Check each endpoint's test-set metrics in
   `properties` before relying on it. For `Half_Life_Obach` and `VDss_Lombardo`
   the authors report a negative R².
-- There is **no applicability domain**. Every structure RDKit parses gets
-  values, including salts, mixtures, metals and inorganics, so standardize
-  structures first. `confidence` is `null`, because this is not a conformal
-  model.
-- A SMILES that RDKit cannot parse, or that parses to no atoms, gets a row of
-  `null`s and is listed in `unparsed`. The rest of the request still succeeds.
-- A request holds at most 2000 compounds and 50 MB; split larger inputs. With
-  2 vCPU, 1000 compounds take about 12–27 s. A malformed request gets `400`
-  (no SMILES, no `smiles` column, not a CSV or TSV), `413` (too large) or
-  `415` (another content type), with the reason in `detail`.
-- Values agree with `admet_ai` run in Python. The model computes in float32,
-  so the last digit can vary with the CPU and with which other molecules
-  share the request.
-
-### Differences from the QSAR models
-
-The routes, the inputs, the envelope (`model`, `predicts`, `confidence`,
-`n_compounds`, `unparsed`, `predictions`), the order of the rows, the error
-codes and the limits are the same as the QSAR models'. The client in
-chemsafe-agent's `qsar_modelling/scripts/utils.py` sends to and checks this
-API unchanged: `_request_predictions("ADMET-AI", smiles)` finds it at
-`admet-ai` and gets back one row per SMILES. What differs is inside a row:
-
-| | QSAR models | ADMET-AI |
-|---|---|---|
-| Columns after `smiles`, `endpoint` | `confidence`, `p_inactive`, `p_active`, `prediction` | the 52 property columns above |
-| A row for an unparsable SMILES | `p_inactive`, `p_active` and `prediction` are `null` | every property column is `null` |
-| `confidence` | the model's conformal confidence | `null` |
-| `GET /` | | also `version` and `properties` |
-
-So code that reads `row["prediction"]`, such as `predict_endpoint`, needs
-its own reader for ADMET-AI rows.
-
+  
 ## Build and run
 
 ```bash
@@ -132,16 +100,6 @@ docker build --platform linux/amd64 -t ths-admet-ai:1.0.0 .
 docker run --rm -p 8080:8080 ths-admet-ai:1.0.0
 curl "http://localhost:8080/predict?smiles=CCO"
 ```
-
-The build runs `validate.py`, as the app's user. It predicts all 2,845
-DrugBank approved drugs and compares them with the values the ADMET-AI
-authors ship in the package. The RDKit properties must match to 1e-9. The
-model outputs must match to within 1e-4 of each property's spread across the
-drugs: on arm64 they match bit for bit, and on amd64 to within 3e-6. Two known
-exceptions are allowed: today's RDKit computes QED differently for two
-deuterated drugs. The check also requires unparsable SMILES placed among the
-drugs to come back as empty rows in place. If anything differs, the build
-fails.
 
 torch comes from PyTorch's CPU-only index, at the version
 `requirements.txt` pins. RDKit is pinned to 2025.9.6, the last 2025.09
@@ -157,10 +115,4 @@ Without Docker, with Python 3.12: `pip install -r requirements.txt`, then
 `./start-script.sh`. On Linux, first install torch from the CPU-only index as
 the Dockerfile does, or pip fetches the CUDA build.
 
-## Citation
 
-> Swanson, K.; Walther, P.; Leitz, J.; Mukherjee, S.; Wu, J. C.;
-> Shivnaraine, R. V.; Zou, J. ADMET-AI: a machine learning ADMET platform for
-> evaluation of large-scale chemical libraries. *Bioinformatics* **2024**,
-> *40* (7), btae416.
-> DOI: [10.1093/bioinformatics/btae416](https://doi.org/10.1093/bioinformatics/btae416)
