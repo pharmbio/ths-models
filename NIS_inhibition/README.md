@@ -104,49 +104,6 @@ the build fails.
 Without Docker, with Python 3.12: `pip install -r requirements.txt`, then
 `./start-script.sh`.
 
-## Deploy on SciLifeLab Serve
-
-1. Build for `linux/amd64`, which Serve runs, and push the image to a public
-   registry:
-
-   ```bash
-   docker build --platform linux/amd64 -t ghcr.io/<user>/ths-nis-inhibition:1.0.0 .
-   docker push ghcr.io/<user>/ths-nis-inhibition:1.0.0
-   ```
-
-2. In a Serve project, create a custom app with:
-   - **Image**: `ghcr.io/<user>/ths-nis-inhibition:1.0.0`
-   - **Port**: `8080`
-   - **Subdomain**: `nis-inhibition`
-
-   It needs no persistent storage and no settings. Serve's default 2 vCPU and
-   4 GB are enough: the app peaks at about 0.2 GB while the model loads.
-3. For an update, build and push a new tag (`1.0.1`, ...) and change the app's
-   image. Serve does not redeploy a tag it has already run.
-
-The image follows Serve's rules: user `qsar` with uid 1000, `start-script.sh`
-in `WORKDIR` as its command, and one port (8080) in the range 3000–9999.
-
-ChemSafeAgent's `qsar_modelling` skill finds this app at `nis-inhibition`: the
-model's name in lower case, with `-` for `_`. To use another pattern for all
-models, set `QSAR_API_URL` in the agent's environment, e.g.
-`https://ths-{subdomain}.serve.scilifelab.se`.
-
-## Pinned versions
-
-`requirements.txt` pins RDKit 2025.9.3 and NumPy 2.4.0, the versions in
-chemsafe-agent's `requirements.txt`. Compare predictions before and after
-changing either:
-
-- **RDKit** computes the descriptors, and `validate.py` does not check them:
-  it starts from fixed descriptors. RDKit 2026.03 changed the H-bond acceptor
-  count for N-heterocycles
-  ([#8997](https://github.com/rdkit/rdkit/releases/tag/Release_2026_03_1)),
-  one of the 119 descriptors, which changes p-values for compounds such as
-  1-vinylimidazole. The model was trained with the earlier definition.
-- **NumPy** 2.4 already warns (`VisibleDeprecationWarning`) when it reads the
-  2021 pickle; a later version may refuse it.
-
 ## Citation
 
 > Dracheva, E.; Norinder, U.; Rydén, P.; Engelhardt, J.; Weiss, J. M.;
