@@ -1,0 +1,15 @@
+# The versions validate.py was run with. See README.md before changing RDKit,
+# Chemprop or torch. The Dockerfile installs torch from PyTorch's CPU-only
+# index; on linux/amd64 the PyPI wheel brings gigabytes of CUDA.
+admet-ai==2.0.1
+chemprop==2.2.3
+lightning==2.6.5
+torch==2.11.0
+rdkit==2025.9.6
+numpy==2.4.0
+pandas==2.3.3
+scipy==1.17.1
+scikit-learn==1.8.0
+fastapi==0.128.0
+uvicorn==0.40.0
+python-multipart==0.0.21

@@ -1,0 +1,5 @@
+{
+  "model": "ADMET-AI",
+  "predicts": "Absorption, distribution, metabolism, excretion and toxicity (ADMET) endpoints and physicochemical properties",
+  "subdomain": "admet-ai"
+}
